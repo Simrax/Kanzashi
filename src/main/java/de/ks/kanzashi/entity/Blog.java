@@ -1,9 +1,12 @@
 package de.ks.kanzashi.entity;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -15,6 +18,10 @@ public class Blog {
 	private Integer id;
 	
 	private String imageUrl;
+	
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	private byte[] image;
 	
 	private String name;
 	
@@ -63,5 +70,13 @@ public class Blog {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 }
