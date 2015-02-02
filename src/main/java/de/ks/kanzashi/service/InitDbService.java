@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import de.ks.kanzashi.entity.Item;
@@ -42,15 +43,21 @@ public class InitDbService {
 	@PostConstruct
 	public void init() {
 		if(roleRepository.findByName("ROLE_ADMIN") == null){		
-			// create first role
+			// create role
 			Role roleAdmin = new Role();
 			roleAdmin.setName("ROLE_ADMIN");
 			roleRepository.save(roleAdmin);
 			
+			Role roleUser = new Role();
+			roleUser.setName("ROLE_USER");
+			roleRepository.save(roleUser);
+			
 			// create first user admin
 			User userAdmin = new User();
+			userAdmin.setEnabled(true);
 			userAdmin.setName("admin");
-			userAdmin.setPassword("admin");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			userAdmin.setPassword(encoder.encode("admin"));
 			
 			// create role array
 			List<Role> roles = new ArrayList<Role>();

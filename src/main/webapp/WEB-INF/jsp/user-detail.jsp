@@ -5,9 +5,10 @@
 
 <h1>${user.name}</h1>
 
-<c:forEach items="${user.items}" var="item">
+hier user details
 
-	<h1>${item.name}</h1>
-	<p>${item.imageUrl}</p>
+<%-- <c:forEach items="${users}" var="user">
 
-</c:forEach>
+	hier user details
+
+</c:forEach> --%>

@@ -6,6 +6,15 @@
 
 	<context:component-scan base-package="de.ks.kanzashi.controller"></context:component-scan>
 	
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+        
+    <bean id="fileValidator"
+    	class="de.ks.kanzashi.validator.FileValidator"/>
+    	
+    <bean id="messageSource"
+    	class="org.springframework.context.support.ResourceBundleMessageSource"/>	
+	
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
