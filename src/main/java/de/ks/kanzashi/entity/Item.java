@@ -1,12 +1,11 @@
 package de.ks.kanzashi.entity;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,22 +16,33 @@ public class Item {
 	private Integer id;
 	
 	private String imageUrl;
-
-	private String videoUrl;
-
-	@Column(name = "insert_date")
-	private Date insertDate;
+	
+	@Lob
+	private byte[] image;
+	
+	private String name;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	@OneToOne
-	@JoinColumn(name = "item_id")
-	private Blog blog;
-	
-	public Blog getBlog() {
-		return blog;
+	private ItemDetail itemDetail;
+
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setBlog(Blog blog) {
-		this.blog = blog;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Integer getId() {
@@ -43,27 +53,27 @@ public class Item {
 		this.id = id;
 	}
 
-	public Date getInsertDate() {
-		return insertDate;
+	public String getName() {
+		return name;
 	}
 
-	public void setInsertDate(Date insertDate) {
-		this.insertDate = insertDate;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
-	public String getVideoUrl() {
-		return videoUrl;
+	public ItemDetail getItemDetail() {
+		return itemDetail;
 	}
 
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
+	public void setItemDetail(ItemDetail itemDetail) {
+		this.itemDetail = itemDetail;
 	}
 }

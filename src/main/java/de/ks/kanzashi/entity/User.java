@@ -27,15 +27,7 @@ public class User {
 	private List<Role> roles;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Blog> blogs;
-	
-	public List<Blog> getBlogs() {
-		return blogs;
-	}
-
-	public void setBlogs(List<Blog> blogs) {
-		this.blogs = blogs;
-	}
+	private List<Item> items;
 
 	public List<Role> getRoles() {
 		return roles;
@@ -75,5 +67,13 @@ public class User {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 }

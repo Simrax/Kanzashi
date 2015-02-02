@@ -6,6 +6,6 @@ import de.ks.kanzashi.entity.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer>{
 
-	//Role findByeName(String name);
+	Role findByName(String name);
 
 }

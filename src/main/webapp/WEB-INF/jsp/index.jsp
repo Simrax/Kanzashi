@@ -3,8 +3,6 @@
 
 <%@ include file="../layout/tablib.jsp" %>
 
-<c:forEach items="${user.blog}" var="blog">
-
-
-
+<c:forEach items="${user.items}" var="item">
+	<img src="index/image.html?id=${item.id}" alt="item image" class="img-circle img-thumbnail"/>
 </c:forEach>
