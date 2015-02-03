@@ -8,10 +8,10 @@
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 
-	<definition name="index" extends="common">
+	<definition name="item" extends="common">
 		<put-attribute name="title" value="Kanzashi" />
-		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
-		<put-attribute name="current" value="index"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/item.jsp" />
+		<put-attribute name="current" value="item"/>
 	</definition>
 	
 	<definition name="users" extends="common">
@@ -36,5 +36,11 @@
 		<put-attribute name="title" value="Login" />
 		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 		<put-attribute name="current" value="login"/>
+	</definition>
+	
+	<definition name="item-detail" extends="common">
+		<put-attribute name="title" value="Item detail" />
+		<put-attribute name="body" value="/WEB-INF/jsp/item-detail.jsp" />
+		<put-attribute name="current" value="item"/>
 	</definition>
 </tiles-definitions>

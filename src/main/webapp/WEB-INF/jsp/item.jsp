@@ -27,13 +27,18 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						<h4 class="modal-title" id="myModalLabel">Create new item</h4>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label">Image:</label>
+							<label for="name" class="col-sm-2 control-label">Name:</label>
 							<div class="col-sm-10">
-								<input type="file" name="file" accept="image/*"/>
+								<form:input path="name" cssClass="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-10">
+								<input type="file" name="file" accept="image/*" />
 								<!-- <input name="imageUrl" type="file" size="50" accept="image/*"/> -->
 							</div>
 						</div>
@@ -52,6 +57,15 @@
 <br>
 
 <c:forEach items="${user.items}" var="item">
-	<img src="index/image.html?id=${item.id}" alt="item image"
-		class="img-circle img-thumbnail" />
+	<table class="table table-striped table-hover">
+		<tr>
+			<td>
+				<a href='<spring:url value="/item/${item.name}.html"></spring:url>'><img
+					src="index/image.html?id=${item.id}" alt="${item.name}"
+					class="img-circle img-thumbnail" /> 
+				</a>
+			</td>
+			<td>${item.name }</td>
+		</tr>
+	</table>
 </c:forEach>

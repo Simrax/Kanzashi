@@ -13,4 +13,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	List<Item> findByUser(User user, Pageable pageable);
 
 	Item findById(Integer id);
+
+	Item findByName(String name);
 }

@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Item {
@@ -20,6 +21,7 @@ public class Item {
 	@Lob
 	private byte[] image;
 	
+	@Size(min = 1, message = "Name must be at least 1 character!")
 	private String name;
 	
 	@ManyToOne
