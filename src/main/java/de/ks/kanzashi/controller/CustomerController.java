@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import de.ks.kanzashi.entity.User;
-import de.ks.kanzashi.service.UserService;
+import de.ks.kanzashi.entity.Customer;
+import de.ks.kanzashi.service.CustomerService;
 
 @Controller
-public class UserController {
+public class CustomerController {
 
 	@Autowired
-	private UserService userService;
+	private CustomerService customerService;
 	
 	@ModelAttribute("user")
-	public User construct(){
-		return new User();
+	public Customer construct(){
+		return new Customer();
 	}
 	
 	@RequestMapping("/users")
 	public String users(Model model){
-		model.addAttribute("users", userService.findAll());
+		model.addAttribute("users", customerService.findAll());
 		return "users";
 	}
 	
-	@RequestMapping("/users/{id}")
-	public String detail(Model model, @PathVariable int id){
-		model.addAttribute("user", userService.findOne(id));
+	@RequestMapping("/users/{email}")
+	public String detail(Model model, @PathVariable String email){
+		model.addAttribute("user", customerService.findOne(email));
 		return "user-detail";
 	}
 	
@@ -45,24 +45,28 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result){
+	public String doRegister(@Valid @ModelAttribute("user") Customer user, BindingResult result){
 		if(result.hasErrors()){
 			return "user-register";
 		}
-		userService.save(user);
+		
+		if(customerService.findOne(user.getEmail()) != null)
+			return "redirect:/register.html?success=false";
+		
+		customerService.save(user);
 		return "redirect:/register.html?success=true";
 	}
 	
 	@RequestMapping("/account")
 	public String account(Model model, Principal principal){
 		String name = principal.getName();
-		model.addAttribute("user", userService.findByName(name));
+		model.addAttribute("user", customerService.findOne(name));
 		return "user-detail";
 	}
 	
 	@RequestMapping("/users/remove/{id}")
 	public String removeUser(@PathVariable int id){
-		userService.delete(id);
+		customerService.delete(id);
 		return "redirect:/users.html";
 	}
 }

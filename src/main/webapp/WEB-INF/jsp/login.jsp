@@ -45,11 +45,21 @@
 }
 </style>
 
+<c:if test="${sessionScope[\"SPRING_SECURITY_LAST_EXCEPTION\"].message eq 'Bad credentials'}">
+<div class="alert alert-danger">Email/Password are incorrect.</div>
+</c:if>
+<c:if test="${sessionScope[\"SPRING_SECURITY_LAST_EXCEPTION\"].message eq 'User is disabled'}">
+<div class="alert alert-danger">Your account is disabled, please contact administrator.</div>
+</c:if>
+<c:if test="${fn:containsIgnoreCase(sessionScope[\"SPRING_SECURITY_LAST_EXCEPTION\"].message,'A communications error has been detected')}">
+<div class="alert alert-danger">Database connection is down, try after sometime.</div>
+</c:if>
+
 <form class="form-signin"
 	action='<spring:url value="/j_spring_security_check"/>' method="POST">
 	<h2 class="form-signin-heading">Please sign in</h2>
-	<label for="inputName" class="sr-only">Name</label> 
-	<input type="text" name="j_username" id="inputName" class="form-control" placeholder="Name" required autofocus> 
+	<label for="inputName" class="sr-only">Email</label> 
+	<input type="text" name="j_username" id="inputName" class="form-control" placeholder="Email" required autofocus> 
 	<label for="inputPassword" class="sr-only">Password</label>
 	<input type="password" name="j_password" id="inputPassword" class="form-control" placeholder="Password" required>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

@@ -17,15 +17,7 @@ public class Role {
 	private String name;
 	
 	@ManyToMany(mappedBy = "roles")
-	private List<User> users;
-	
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+	private List<Customer> customers;
 
 	public Integer getId() {
 		return id;
@@ -41,5 +33,13 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
 	}
 }

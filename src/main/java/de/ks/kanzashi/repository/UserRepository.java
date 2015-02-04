@@ -2,10 +2,10 @@ package de.ks.kanzashi.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import de.ks.kanzashi.entity.User;
+import de.ks.kanzashi.entity.Customer;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<Customer, Integer>{
 
-	User findByName(String name);
+	Customer findByEmail(String name);
 
 }

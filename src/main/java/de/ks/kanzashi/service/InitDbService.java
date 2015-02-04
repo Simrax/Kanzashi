@@ -1,11 +1,6 @@
 package de.ks.kanzashi.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import de.ks.kanzashi.entity.Item;
-import de.ks.kanzashi.entity.ItemDetail;
+import de.ks.kanzashi.entity.Customer;
 import de.ks.kanzashi.entity.Role;
-import de.ks.kanzashi.entity.User;
-import de.ks.kanzashi.repository.ItemDetailRepository;
+import de.ks.kanzashi.repository.ItemImageRepository;
 import de.ks.kanzashi.repository.ItemRepository;
 import de.ks.kanzashi.repository.RoleRepository;
 import de.ks.kanzashi.repository.UserRepository;
@@ -35,7 +28,7 @@ public class InitDbService {
 	private UserRepository userRepository;
 
 	@Autowired
-	private ItemDetailRepository itemDetailRepository;
+	private ItemImageRepository itemDetailRepository;
 
 	@Autowired
 	private ItemRepository itemRepository;
@@ -53,11 +46,11 @@ public class InitDbService {
 			roleRepository.save(roleUser);
 			
 			// create first user admin
-			User userAdmin = new User();
+			Customer userAdmin = new Customer();
 			userAdmin.setEnabled(true);
-			userAdmin.setName("admin");
+			userAdmin.setEmail("wooff@gmx.de");
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			userAdmin.setPassword(encoder.encode("admin"));
+			userAdmin.setPassword(encoder.encode("12345"));
 			
 			// create role array
 			List<Role> roles = new ArrayList<Role>();
@@ -65,33 +58,33 @@ public class InitDbService {
 			userAdmin.setRoles(roles);
 			userRepository.save(userAdmin);
 			
-			// create first Item
-			Item item = new Item();
-			item.setName("first item test");
-			item.setImageUrl("http://www.sankt-georgen.de/sites/sankt-georgen.de/files/u11/avatar-blank.jpg");
-			setImage(item.getImageUrl(), item);
-			item.setUser(userAdmin);
-			itemRepository.save(item);
+//			// create first Item
+//			Item item = new Item();
+//			item.setName("first item test");
+//			item.setImageUrl("http://www.sankt-georgen.de/sites/sankt-georgen.de/files/u11/avatar-blank.jpg");
+//			setImage(item.getImageUrl(), item);
+//			item.setUser(userAdmin);
+//			itemRepository.save(item);
 		}
 	}
 
-	public void setImage(String imageUrl, Item item) {
-		
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-	    try {
-	    	URL url = new URL(imageUrl);
-	        byte[] chunk = new byte[4096];
-	        int bytesRead;
-	        InputStream stream = url.openStream();
-
-	        while ((bytesRead = stream.read(chunk)) > 0) {
-	            outputStream.write(chunk, 0, bytesRead);
-	        }
-
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	    item.setImage(outputStream.toByteArray());
-	}
+//	public void setImage(String imageUrl, Item item) {
+//		
+//		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//	    try {
+//	    	URL url = new URL(imageUrl);
+//	        byte[] chunk = new byte[4096];
+//	        int bytesRead;
+//	        InputStream stream = url.openStream();
+//
+//	        while ((bytesRead = stream.read(chunk)) > 0) {
+//	            outputStream.write(chunk, 0, bytesRead);
+//	        }
+//
+//	    } catch (IOException e) {
+//	        e.printStackTrace();
+//	    }
+//	    item.setImage(outputStream.toByteArray());
+//	}
 
 }

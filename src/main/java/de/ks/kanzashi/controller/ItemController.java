@@ -14,16 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.ks.kanzashi.entity.Item;
+import de.ks.kanzashi.entity.ItemImage;
 import de.ks.kanzashi.fileUpload.FileUpload;
 import de.ks.kanzashi.fileUpload.FileValidator;
+import de.ks.kanzashi.service.ItemImageService;
 import de.ks.kanzashi.service.ItemService;
-import de.ks.kanzashi.service.UserService;
+import de.ks.kanzashi.service.CustomerService;
 
 @Controller
 public class ItemController {
 	
 	@Autowired
-	private UserService userService;
+	private CustomerService userService;
+	
+	@Autowired
+	private ItemImageService itemImageService;
 	
 	@Autowired
 	FileValidator validator;
@@ -31,24 +36,26 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@ModelAttribute("file")
-	public FileUpload construct(){
-		return new FileUpload();
+	@ModelAttribute("item")
+	public Item constructItem(){
+		return new Item();
 	}
 	
 	@RequestMapping("/item")
 	public String index(Model model){
-		model.addAttribute("user", userService.findByName("admin"));
+		model.addAttribute("items", itemService.findAll());
 		return "item";
 	}
 	
 	@RequestMapping(value = "/item", method = RequestMethod.POST)
-	public String fileUploaded(Model model, @Validated FileUpload file, BindingResult result, Principal principal) throws IOException{
+	public String fileUploaded(@ModelAttribute Item item, BindingResult result, Principal principal) throws IOException{
 		String name = principal.getName();
-		Item item = new Item();
-		item.setImage(file.getFile().getBytes());
-		item.setName(file.getName());
-		itemService.save(item, name);
+		System.out.println("gehe nach Edit hier rein");
+		ItemImage itemImage = new ItemImage();
+		itemImage.setImage(item.getFile().getBytes());
+		
+		itemService.save(item, name, itemImage);
+		
 		return "redirect:/item.html";
 	}
 	

@@ -2,20 +2,31 @@
 	<entity>
 		<entity-name>de.ks.kanzashi.entity.Item</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>206</entity-height>
-		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>373</entity-Y-Coordinate>
+		<entity-height>226</entity-height>
+		<entity-X-Coordinate>330</entity-X-Coordinate>
+		<entity-Y-Coordinate>120</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>de.ks.kanzashi.entity.ItemDetail</entity-name>
+		<entity-name>de.ks.kanzashi.entity.Customer</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>186</entity-height>
-		<entity-X-Coordinate>360</entity-X-Coordinate>
-		<entity-Y-Coordinate>383</entity-Y-Coordinate>
+		<entity-height>346</entity-height>
+		<entity-X-Coordinate>120</entity-X-Coordinate>
+		<entity-Y-Coordinate>96</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>de.ks.kanzashi.entity.ItemImage</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>146</entity-height>
+		<entity-X-Coordinate>330</entity-X-Coordinate>
+		<entity-Y-Coordinate>430</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -25,19 +36,8 @@
 		<entity-name>de.ks.kanzashi.entity.Role</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>146</entity-height>
-		<entity-X-Coordinate>360</entity-X-Coordinate>
-		<entity-Y-Coordinate>81</entity-Y-Coordinate>
-		<primary-collapsed>false</primary-collapsed>
-		<relation-collapsed>false</relation-collapsed>
-		<basic-collapsed>false</basic-collapsed>
-	</entity>
-
-	<entity>
-		<entity-name>de.ks.kanzashi.entity.User</entity-name>
-		<entity-width>120</entity-width>
-		<entity-height>226</entity-height>
-		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>51</entity-Y-Coordinate>
+		<entity-X-Coordinate>-100</entity-X-Coordinate>
+		<entity-Y-Coordinate>166</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

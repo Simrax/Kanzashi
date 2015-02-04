@@ -1,13 +1,21 @@
 package de.ks.kanzashi.entity;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Item {
@@ -16,36 +24,26 @@ public class Item {
 	@GeneratedValue
 	private Integer id;
 	
-	private String imageUrl;
+	@Column(name = "release_date")
+	private Date releaseDate;
 	
-	@Lob
-	private byte[] image;
+	@Transient
+	private MultipartFile file;
+	
+	private double price;
+	
+	private int stock;
 	
 	@Size(min = 1, message = "Name must be at least 1 character!")
 	private String name;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 	
-	@OneToOne
-	private ItemDetail itemDetail;
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name = "itemImage_id")
+	private ItemImage itemImage;
 
 	public Integer getId() {
 		return id;
@@ -53,6 +51,30 @@ public class Item {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public String getName() {
@@ -63,19 +85,27 @@ public class Item {
 		this.name = name;
 	}
 
-	public byte[] getImage() {
-		return image;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public ItemDetail getItemDetail() {
-		return itemDetail;
+	public ItemImage getItemImage() {
+		return itemImage;
 	}
 
-	public void setItemDetail(ItemDetail itemDetail) {
-		this.itemDetail = itemDetail;
+	public void setItemImage(ItemImage itemImage) {
+		this.itemImage = itemImage;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 }

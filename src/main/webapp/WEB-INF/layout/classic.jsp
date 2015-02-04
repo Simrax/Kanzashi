@@ -50,9 +50,9 @@
 						<security:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html"/>'>Users</a></li>					
 						</security:authorize>
-						<security:authorize access="isAuthenticated()">
+<%-- 						<security:authorize access="isAuthenticated()">
 							<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/account.html"/>'>My account</a></li>
-						</security:authorize>
+						</security:authorize> --%>
 						<li><a href="#">About</a></li>
 						<li><a href="#">Contact</a></li>
 						<!-- <li class="dropdown">

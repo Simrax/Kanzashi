@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import de.ks.kanzashi.entity.Item;
-import de.ks.kanzashi.entity.User;
+import de.ks.kanzashi.entity.Customer;
 
 public interface ItemRepository extends JpaRepository<Item, Integer>{
 	
-	List<Item> findByUser(User user, Pageable pageable);
+	List<Item> findByCustomer(Customer customer, Pageable pageable);
 
 	Item findById(Integer id);
 

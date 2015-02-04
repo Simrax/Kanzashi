@@ -14,7 +14,7 @@
 	<button type="button" class="btn btn-primary btn-lg"
 		data-toggle="modal" data-target="#myModal">New Item</button>
 
-	<form:form commandName="file" cssClass="form-horizontal"
+	<form:form commandName="item" cssClass="form-horizontal"
 		enctype="multipart/form-data">
 
 		<!-- Modal -->
@@ -37,9 +37,20 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="name" class="col-sm-2 control-label">Price:</label>
+							<div class="col-sm-10">
+								<form:input path="price" cssClass="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-2 control-label">Stock:</label>
+							<div class="col-sm-10">
+								<form:input path="stock" cssClass="form-control" />
+							</div>
+						</div>
+						<div class="form-group" align="center">
 							<div class="col-sm-10">
 								<input type="file" name="file" accept="image/*" />
-								<!-- <input name="imageUrl" type="file" size="50" accept="image/*"/> -->
 							</div>
 						</div>
 					</div>
@@ -56,16 +67,53 @@
 <br>
 <br>
 
-<c:forEach items="${user.items}" var="item">
-	<table class="table table-striped table-hover">
-		<tr>
-			<td>
-				<a href='<spring:url value="/item/${item.name}.html"></spring:url>'><img
-					src="index/image.html?id=${item.id}" alt="${item.name}"
-					class="img-circle img-thumbnail" /> 
-				</a>
-			</td>
-			<td>${item.name }</td>
-		</tr>
+
+
+<c:forEach items="${items}" var="item">
+	<table style="width: auto; display: inline-table; margin-right: 10px; margin-bottom: 10px;" class="table table-hover">
+		<tbody>
+			<tr>
+				<td>
+					<div class="modal-body">
+						<a href='<spring:url value="/item/${item.name}.html"/>'>
+								<img src="index/image.html?id=${item.itemImage.id}"
+								alt="${item.name}" class="img-circle img-thumbnail" />
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class="modal-body">
+						<div class="form-group">
+							<label style="color:#80BFFF" for="name">${item.name}</label>
+						</div>
+						<div class="form-group">
+							<label style="color:#FA0505" for="price">${item.price} EUR</label>
+						</div>
+						<div class="form-group">
+							<c:if test="${item.stock <= 5}">
+								<label style="color:#FA0505" for="onlyStock">only ${item.stock} in stock</label>
+							</c:if>
+							<c:if test="${item.stock > 5}">
+								<label style="color:#FAC105" for="stillStock">still ${item.stock} stock</label>
+							</c:if>
+						</div>
+					</div>
+				
+				<%-- 
+					<h1><label style="color:#80BFFF" for="name" class="col-sm-2 control-label">${item.name}</label></h1>
+					
+					
+					
+					<font color="RED"><b>${item.price} EUR</b></font> 
+					<br><br> 
+					<c:if test="${item.stock <= 5}">
+						<font color="RED">Only ${item.stock} in stock</font>
+					</c:if> <c:if test="${item.stock > 5}">
+						still ${item.stock} stock
+					</c:if> --%>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </c:forEach>
+
