@@ -27,11 +27,11 @@
 		<property name="password" value="#{@dbUrl.getUserInfo().split(':')[1]}"/> 
 	</bean> -->
 	
-<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-		<property name="url" value="postgres://ekpjlyqmestixu:GGzHK7WY3vUp7w0SakK4UwTvB9@ec2-54-217-230-100.eu-west-1.compute.amazonaws.com:5432/db94njn0shg2be"/> 
-		<property name="username" value="ekpjlyqmestixu"/> 
-		<property name="password" value="GGzHK7WY3vUp7w0SakK4UwTvB9"/> 
-	</bean> -->
+ 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="url" value="postgres://hodbkduspmfywo:5b6Lhl1ZRgSjEcuthO38vQTb7b@ec2-107-20-169-200.compute-1.amazonaws.com:5432/d40it7o3a5o9i6"/> 
+		<property name="username" value="hodbkduspmfywo"/> 
+		<property name="password" value="5b6Lhl1ZRgSjEcuthO38vQTb7b"/> 
+	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -40,13 +40,13 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/kanzashi_schema" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
-	</bean>
+	</bean> -->
 
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
