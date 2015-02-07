@@ -42,9 +42,9 @@ public class CustomerController {
 		return "user-detail";
 	}
 	
-	@RequestMapping("/users/remove/{id}")
-	public String removeUser(@PathVariable int id){
-		customerService.delete(id);
+	@RequestMapping("/users/remove/{email}")
+	public String removeUser(@PathVariable String email){
+		customerService.delete(email);
 		return "redirect:/users.html";
 	}
 }

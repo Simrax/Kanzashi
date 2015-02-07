@@ -3,20 +3,13 @@ package de.ks.kanzashi.service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.transaction.Transactional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import de.ks.kanzashi.entity.Customer;
-import de.ks.kanzashi.entity.Item;
-import de.ks.kanzashi.entity.ItemImage;
 import de.ks.kanzashi.entity.Role;
 import de.ks.kanzashi.repository.ItemImageRepository;
 import de.ks.kanzashi.repository.ItemRepository;
@@ -78,7 +71,8 @@ public class CustomerService {
 		userRepository.save(user);
 	}
 
-	public void delete(int id) {
-		userRepository.delete(id);
+	public void delete(String email) {
+		Customer customer = userRepository.findByEmail(email);
+		userRepository.delete(customer);
 	}
 }

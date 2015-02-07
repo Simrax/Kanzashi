@@ -10,18 +10,22 @@
 
 <security:authorize access="hasRole('ROLE_ADMIN')">
 
-	<script type="text/javascript">
-		$(document).ready(
-				function() {
-					$(".triggerRemove").click(
-							function(e) {
-								e.preventDefault();
-								$("#modalRemove .removeBtn").attr("href",
-										$(this).attr("href"));
-								$("#modalRemove").modal();
-							});
-				});
-	</script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$(".triggerRemove").click(
+		function(e) {
+			e.preventDefault();
+			$("#modalRemove .removeBtn").attr("href",
+					$(this).attr("href"));
+			$("#modalRemove").modal();
+	});
+	
+	$("#deleteImageButton").click(function(){
+		$("#ImageDivId").remove();
+		$('#fileUploadId').get(0).type = 'file';
+	});
+});
+</script>
 
 	<a href="<spring:url value="/item/remove/${item.id}.html"/>"
 		class="btn btn-danger triggerRemove">remove item</a>
@@ -46,13 +50,11 @@
 		</div>
 	</div>
 
-
-	<%-- <!-- Button trigger modal -->
+<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary"
 		data-toggle="modal" data-target="#myModal">edit item</button>
 
-	<form:form commandName="itemEdit" cssClass="form-horizontal"
-		enctype="multipart/form-data">
+	<form class="form-horizontal" action="/itemEdit.html" method="post" enctype="multipart/form-data">
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -70,24 +72,25 @@
 						<div class="form-group">
 							<label for="name" class="col-sm-2 control-label">Name:</label>
 							<div class="col-sm-10">
-								<form:input path="name" cssClass="form-control" value="${item.name}"/>
+								<input type="hidden" name="id" value="${item.id}" />
+								<input name="name" class="form-control" value="${item.name}"/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label">Price:</label>
+							<label for="name" class="col-sm-2 control-label">Preis:</label>
 							<div class="col-sm-10">
-								<form:input path="price" cssClass="form-control" value="${item.price}"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label">Stock:</label>
-							<div class="col-sm-10">
-								<form:input path="stock" cssClass="form-control" value="${item.stock}"/>
+								<input name="price" class="form-control" value="${item.price}"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-10" align="center">
-								<input type="file" name="file" accept="image/*"/>
+								<input id="fileUploadId" type="hidden" name="file" accept="image/*"/>
+							</div>
+						</div>
+						<div class="form-group" id="ImageDivId">
+							<div class="col-sm-10" align="center">
+								<img src="/image.html?id=${item.itemImage.id}" style="width: 200px; height: 150px;" />
+								<button id="deleteImageButton" class="btn btn-danger">Bild löschen</button>
 							</div>
 						</div>
 					</div>
@@ -98,8 +101,7 @@
 				</div>
 			</div>
 		</div>
-	</form:form>
- --%>
+	</form>
 </security:authorize>
 
 <br>
@@ -109,10 +111,8 @@
 	<tbody>
 		<tr>
 			<td>
-				<div class="targetarea"
-					style="float: left; width: 400px; height: 300px;">
-					<img id="multizoom1" alt="zoomable" title=""
-						src="/image.html?id=${item.itemImage.id}"
+				<div class="targetarea" style="float: left; width: 400px; height: 300px;">
+					<img id="multizoom1" alt="zoomable" title="" src="/image.html?id=${item.itemImage.id}"
 						style="width: 400px; height: 300px;" />
 				</div>
 			</td>

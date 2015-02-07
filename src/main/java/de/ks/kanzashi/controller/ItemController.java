@@ -49,10 +49,11 @@ public class ItemController {
 	@RequestMapping(value = "/item", method = RequestMethod.POST)
 	public String fileUploaded(@ModelAttribute Item item, BindingResult result, Principal principal) throws IOException{
 		String name = principal.getName();
+		System.out.println("bin beim upload angekommen");
 		ItemImage itemImage = new ItemImage();
 		itemImage.setImage(item.getFile().getBytes());
-		
-		itemService.save(item, name, itemImage);
+		item.setItemImage(itemImage);
+		itemService.save(item, name);
 		
 		return "redirect:/item.html";
 	}

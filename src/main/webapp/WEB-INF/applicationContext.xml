@@ -13,16 +13,25 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
+	
+	<jpa:repositories base-package="de.ks.kanzashi.repository"
+		entity-manager-factory-ref="emf" />
 
-	<!-- <bean class="java.net.URI" id="dbUrl"> <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/> 
-		</bean> -->
+<!-- 	<bean class="java.net.URI" id="dbUrl"> 
+		<constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/> 
+	</bean>
 
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-		<property name="url" value="#{'jdbc:mysql://' + @dbUrl.getHost() + ':' + 
-		@dbUrl.getPort() + @dbUrl.getPatch()}"/> <property name="username" value="#{@dbUrl.getUserInfo().split(':')[0]}"/> 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="url" value="#{'jdbc:mysql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPatch()}"/> 
+		<property name="username" value="#{@dbUrl.getUserInfo().split(':')[0]}"/> 
 		<property name="password" value="#{@dbUrl.getUserInfo().split(':')[1]}"/> 
-		</bean> -->
-
+	</bean> -->
+	
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="url" value="postgres://ekpjlyqmestixu:GGzHK7WY3vUp7w0SakK4UwTvB9@ec2-54-217-230-100.eu-west-1.compute.amazonaws.com:5432/db94njn0shg2be"/> 
+		<property name="username" value="ekpjlyqmestixu"/> 
+		<property name="password" value="GGzHK7WY3vUp7w0SakK4UwTvB9"/> 
+	</bean> -->
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -30,9 +39,6 @@
 		id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<jpa:repositories base-package="de.ks.kanzashi.repository"
-		entity-manager-factory-ref="emf" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">

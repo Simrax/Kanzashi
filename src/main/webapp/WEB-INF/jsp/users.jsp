@@ -4,7 +4,7 @@
 <%@ include file="../layout/tablib.jsp"%>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+jQuery(document).ready(function($) {
 		$(".triggerRemove").click(function(e) {
 			e.preventDefault();
 			$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));

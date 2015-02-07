@@ -18,4 +18,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	Item findByName(String name);
 
 	List<Item> findItemListByCustomer(Customer customer, PageRequest pageRequest);
+
+	Item findByNameAndPrice(String name, String price);
 }

@@ -43,4 +43,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/item-detail.jsp" />
 		<put-attribute name="current" value="item"/>
 	</definition>
+	
+	<definition name="herkunft" extends="common">
+		<put-attribute name="title" value="Herkunft" />
+		<put-attribute name="body" value="/WEB-INF/jsp/herkunft.jsp" />
+		<put-attribute name="current" value="herkunft"/>
+	</definition>
 </tiles-definitions>

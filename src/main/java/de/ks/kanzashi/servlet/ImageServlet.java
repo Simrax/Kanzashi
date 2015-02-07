@@ -27,10 +27,6 @@ public class ImageServlet extends HttpServlet{
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 	
-	public void getDoGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		doGet(request, response);
-	}
-	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("id"));

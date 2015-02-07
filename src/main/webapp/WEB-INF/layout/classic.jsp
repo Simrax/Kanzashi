@@ -34,8 +34,10 @@
 jQuery(document).ready(function($){
 	 $('#ItemTable').DataTable(
 			 {
-				 bFilter: false, 
-				 "sDom": '<"top">rt<"bottom"flp><"clear">', 
+				 "language": {
+			            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json"
+			        },
+				 "bLengthChange": false,
 				 "ordering": false,
 				 "bProcessing": true,
 				 "sPaginationType": "full_numbers"
@@ -101,15 +103,15 @@ jQuery(document).ready(function($){
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="${current == 'item' ? 'active' : ''}"><a href='<spring:url value="/"/>'>Home</a></li>
+						<li class="${current == 'item' ? 'active' : ''}"><a href='<spring:url value="/"/>'>Artikel</a></li>
 						<security:authorize access="hasRole('ROLE_ADMIN')">
-							<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html"/>'>Users</a></li>					
+							<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html"/>'>Alle Benutzer</a></li>					
 						</security:authorize>
 <%-- 						<security:authorize access="isAuthenticated()">
 							<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/account.html"/>'>My account</a></li>
 						</security:authorize> --%>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact</a></li>
+						<li class="${current == 'herkunft' ? 'active' : ''}"><a href="<spring:url value="/herkunft.html"/>">Herkunft</a></li>
+						<li><a href="#">Kontakt</a></li>
 						<!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -124,7 +126,7 @@ jQuery(document).ready(function($){
               </li> -->
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html"/>'>Register</a></li>
+						<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html"/>'>Registrieren</a></li>
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'login' ? 'active' : ''}"><a href='<spring:url value="/login.html"/>'>Login</a></li>
 						</security:authorize>

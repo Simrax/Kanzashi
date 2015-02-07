@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
  
 
  <table id="ItemTable" style="width: 100%;" class="table-hover">
-	<c:forEach items="${items}" var="item">
+	
 		<thead>
         <tr>
             <th></th>
@@ -107,6 +107,7 @@ jQuery(document).ready(function($) {
         </tr>
     </thead>
 		<tbody>
+		<c:forEach items="${items}" var="item">
 			<tr>
 				<td>
 					<div class="modal-body">
@@ -127,6 +128,7 @@ jQuery(document).ready(function($) {
 					</div> 
 				</td>
 			</tr>
+			</c:forEach>
 		</tbody>
-	</c:forEach>
+	
 </table>
