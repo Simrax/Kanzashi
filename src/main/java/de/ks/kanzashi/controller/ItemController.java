@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.ks.kanzashi.entity.Item;
 import de.ks.kanzashi.entity.ItemImage;
-import de.ks.kanzashi.fileUpload.FileUpload;
 import de.ks.kanzashi.fileUpload.FileValidator;
+import de.ks.kanzashi.service.CustomerService;
 import de.ks.kanzashi.service.ItemImageService;
 import de.ks.kanzashi.service.ItemService;
-import de.ks.kanzashi.service.CustomerService;
 
 @Controller
 public class ItemController {
@@ -50,7 +48,6 @@ public class ItemController {
 	@RequestMapping(value = "/item", method = RequestMethod.POST)
 	public String fileUploaded(@ModelAttribute Item item, BindingResult result, Principal principal) throws IOException{
 		String name = principal.getName();
-		System.out.println("gehe nach Edit hier rein");
 		ItemImage itemImage = new ItemImage();
 		itemImage.setImage(item.getFile().getBytes());
 		
@@ -59,7 +56,7 @@ public class ItemController {
 		return "redirect:/item.html";
 	}
 	
-	@RequestMapping("/item/{name}")
+	@RequestMapping("/item/itemDetails/{name}")
 	public String detail(Model model, @PathVariable String name){
 		model.addAttribute("item", itemService.findByName(name));
 		return "item-detail";

@@ -5,13 +5,10 @@
 
 <%@ include file="../layout/tablib.jsp"%>
 
-<form:form commandName="user" cssClass="form-horizontal">
+<form:form commandName="customer" cssClass="form-horizontal registrationForm">
 
-	<c:if test="${param.success eq true}">
+	<c:if test="${success eq true}">
 		<div class="alert alert-success">Registration successful!</div>
-	</c:if>
-	<c:if test="${param.success eq false}">
-		<div class="alert alert-danger">Email already exist!</div>
 	</c:if>
 
 	<div class="form-group">
@@ -29,6 +26,13 @@
 			<form:errors path="password" />
 		</div>
 	</div>
+	
+	<div class="form-group">
+		<label for="passwordLabel" class="col-sm-2 control-label">Password again:</label>
+		<div class="col-sm-10">
+			<input type="password" name="password_again" id="password_again" class="form-control"/>
+		</div>
+	</div>
 
 	<div class="form-group">
 		<div class="col-sm-2">
@@ -36,3 +40,48 @@
 		</div>
 	</div>
 </form:form>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	
+	$(".registrationForm").validate(
+		{
+			rules: {
+				email: {
+					required : true,
+					email: true,
+					remote : {
+						url: "<spring:url value='/register/available.html' />",
+						type: "get",
+						data: {
+							email: function(){
+								return $("#email").val();
+							}
+						}
+					}
+				},
+				password: {
+					required : true,
+					minlength : 5
+				},
+				password_again: {
+					required : true,
+					minlength : 5,
+					equalTo: "#password"
+				}
+			},
+			highlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			},
+			messages: {
+				email: {
+					remote: "Diese E-Mail-Adresse existiert bereits"
+				}
+			}
+		}
+	);
+});
+</script>

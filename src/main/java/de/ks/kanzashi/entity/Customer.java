@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import de.ks.kanzashi.annotation.UniqueEmail;
+
 @Entity
 public class Customer {
 	
@@ -21,6 +23,7 @@ public class Customer {
 	@Id
 	@Size(min = 1, message = "Invalid email address!")
 	@Email(message = "Invalid email address!")
+	@UniqueEmail(message = "Diese E-Mail-Adresse existiert bereits")
 	private String email;
 	
 	@Size(min = 5, message = "Name must be at least 5 characters!")

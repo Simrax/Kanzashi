@@ -2,16 +2,12 @@ package de.ks.kanzashi.controller;
 
 import java.security.Principal;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.ks.kanzashi.entity.Customer;
 import de.ks.kanzashi.service.CustomerService;
@@ -37,24 +33,6 @@ public class CustomerController {
 	public String detail(Model model, @PathVariable String email){
 		model.addAttribute("user", customerService.findOne(email));
 		return "user-detail";
-	}
-	
-	@RequestMapping("/register")
-	public String showRegister(){
-		return "user-register";
-	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String doRegister(@Valid @ModelAttribute("user") Customer user, BindingResult result){
-		if(result.hasErrors()){
-			return "user-register";
-		}
-		
-		if(customerService.findOne(user.getEmail()) != null)
-			return "redirect:/register.html?success=false";
-		
-		customerService.save(user);
-		return "redirect:/register.html?success=true";
 	}
 	
 	@RequestMapping("/account")

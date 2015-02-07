@@ -14,8 +14,8 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import de.ks.kanzashi.service.ItemImageService;
 
-@WebServlet("/index/image.html")
-public class imageServlet extends HttpServlet{
+@WebServlet("/image.html")
+public class ImageServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,8 +27,12 @@ public class imageServlet extends HttpServlet{
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 	
+	public void getDoGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		doGet(request, response);
+	}
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		byte[] image = itemImageService.loadImage(id);
 		response.setContentType("image/jpeg");

@@ -9,14 +9,15 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 
+
 <security:authorize access="hasRole('ROLE_ADMIN')">
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary btn-lg"
 		data-toggle="modal" data-target="#myModal">New Item</button>
 
-	<form:form commandName="item" cssClass="form-horizontal"
+	<form:form commandName="item" cssClass="form-horizontal itemForm"
 		enctype="multipart/form-data">
-
+ 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -42,12 +43,6 @@
 								<form:input path="price" cssClass="form-control" />
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label">Stock:</label>
-							<div class="col-sm-10">
-								<form:input path="stock" cssClass="form-control" />
-							</div>
-						</div>
 						<div class="form-group" align="center">
 							<div class="col-sm-10">
 								<input type="file" name="file" accept="image/*" />
@@ -62,58 +57,71 @@
 			</div>
 		</div>
 	</form:form>
+	
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$(".itemForm").validate(
+		{
+			rules: {
+				name : {
+					required : true,
+					minlength : 3
+				},
+				price: {
+					required : true,
+					number : true
+				},
+				file: {
+					required : true,
+					accept : "image/*"
+				}
+			},
+			highlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			},
+			messages: {
+				email: {
+					remote: "Such username already exists!"
+				}
+			}
+		}
+	);
+});
+</script>
+	
+	
 </security:authorize>
 
-<br>
-<br>
+<br><br>
+ 
 
+ <table style="width: 100%;" class="table table-hover">
+	<c:forEach items="${items}" var="item">
 
-
-<c:forEach items="${items}" var="item">
-	<table style="width: auto; display: inline-table; margin-right: 10px; margin-bottom: 10px;" class="table table-hover">
 		<tbody>
 			<tr>
 				<td>
 					<div class="modal-body">
-						<a href='<spring:url value="/item/${item.name}.html"/>'>
-								<img src="index/image.html?id=${item.itemImage.id}"
-								alt="${item.name}" class="img-circle img-thumbnail" />
+						<a href='<spring:url value="/item/itemDetails/${item.name}.html"/>'>
+								<img src="/image.html?id=${item.itemImage.id}"
+								alt="${item.name}" class="img-circle img-thumbnail" style="width: 200px; height: 150px;"/>
 						</a>
 					</div>
 				</td>
 				<td>
 					<div class="modal-body">
 						<div class="form-group">
-							<label style="color:#80BFFF" for="name">${item.name}</label>
+							<h1><label style="color: #80BFFF" for="name">${item.name}</label></h1>
 						</div>
 						<div class="form-group">
-							<label style="color:#FA0505" for="price">${item.price} EUR</label>
+							<label style="color: #FA0505; font-size: 20px" for="price">${item.price} EUR</label>
 						</div>
-						<div class="form-group">
-							<c:if test="${item.stock <= 5}">
-								<label style="color:#FA0505" for="onlyStock">only ${item.stock} in stock</label>
-							</c:if>
-							<c:if test="${item.stock > 5}">
-								<label style="color:#FAC105" for="stillStock">still ${item.stock} stock</label>
-							</c:if>
-						</div>
-					</div>
-				
-				<%-- 
-					<h1><label style="color:#80BFFF" for="name" class="col-sm-2 control-label">${item.name}</label></h1>
-					
-					
-					
-					<font color="RED"><b>${item.price} EUR</b></font> 
-					<br><br> 
-					<c:if test="${item.stock <= 5}">
-						<font color="RED">Only ${item.stock} in stock</font>
-					</c:if> <c:if test="${item.stock > 5}">
-						still ${item.stock} stock
-					</c:if> --%>
+					</div> 
 				</td>
 			</tr>
 		</tbody>
-	</table>
-</c:forEach>
-
+	</c:forEach>
+</table>

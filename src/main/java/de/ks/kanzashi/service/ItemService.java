@@ -3,6 +3,9 @@ package de.ks.kanzashi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,7 @@ public class ItemService {
 	}
 
 	public List<Item> findAll() {
-		return itemRepository.findAll();
+		return itemRepository.findAll(new PageRequest(0, 5, Direction.DESC, "name")).getContent();
 	}
+
 }
