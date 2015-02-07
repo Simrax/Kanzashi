@@ -24,13 +24,23 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/css/multizoom.css" type="text/css" />
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" type="text/css" />
 
 <script type="text/javascript" src="/js/multizoom.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
 
 jQuery(document).ready(function($){
-
+	 $('#ItemTable').DataTable(
+			 {
+				 bFilter: false, 
+				 "sDom": '<"top">rt<"bottom"flp><"clear">', 
+				 "ordering": false,
+				 "bProcessing": true,
+				 "sPaginationType": "full_numbers"
+			 });
+	
 	$('#image1').addimagezoom({ // single image zoom
 		zoomrange: [3, 10],
 		magnifiersize: [300,300],

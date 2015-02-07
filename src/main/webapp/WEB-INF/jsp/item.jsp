@@ -98,9 +98,14 @@ jQuery(document).ready(function($) {
 <br><br>
  
 
- <table style="width: 100%;" class="table table-hover">
+ <table id="ItemTable" style="width: 100%;" class="table-hover">
 	<c:forEach items="${items}" var="item">
-
+		<thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
 		<tbody>
 			<tr>
 				<td>
