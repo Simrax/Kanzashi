@@ -1,9 +1,8 @@
 package de.ks.kanzashi.servlet;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -38,18 +37,11 @@ public class EditRecordServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//		response.setContentType("text/html;charset=UFT-8");
-//		System.out.println("old Name " + request.getParameter("id"));
-//		System.out.println("new Name " + request.getParameter("name"));
-//		System.out.println("price " + request.getParameter("price"));
-//		System.out.println("file " + request.getParameter("file"));
-//		
-//		BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-//		String line = null;
-//		while ((line = reader.readLine()) != null) {
-//		    System.out.println(line);
-//		}
-//		
+		int id = 0;
+		String name = null;
+		double price = 0;
+		byte[] imageByte = null;
+		
 		try {
 	        List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 	        for (FileItem item : items) {
@@ -57,33 +49,46 @@ public class EditRecordServlet extends HttpServlet{
 	                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
 	                String fieldName = item.getFieldName();
 	                String fieldValue = item.getString();
-	                System.out.println("fieldName " + fieldName);
-	                System.out.println("fieldValue " + fieldValue);
-	                // ... (do your job here)
+	                
+	                switch (fieldName) {
+					case "id": 
+						id = Integer.parseInt(fieldValue);
+						break;
+					case "name": 
+						name = fieldValue;
+						break;
+					case "price": 
+						price = Double.parseDouble(fieldValue);
+						break;
+					}
 	            } else {
-	                // Process form file field (input type="file").
-	                String fieldName = item.getFieldName();
-	                String fileName = FilenameUtils.getName(item.getName());
-	                InputStream fileContent = item.getInputStream();
-	                //System.out.println("fieldName " + fieldName);
-	                //System.out.println("fieldValue " + fileName);
-	                // ... (do your job here)
+	                // Process form file field (input type="file").                
+	                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	                byte[] chunk = new byte[4096];
+	    	        int bytesRead;
+	    	        InputStream stream = item.getInputStream();
+	    
+	    	        while ((bytesRead = stream.read(chunk)) > 0) {
+	    	            outputStream.write(chunk, 0, bytesRead);
+	    	        }
+	    	        
+	    	        imageByte = outputStream.toByteArray();
 	            }
 	        }
 	    } catch (FileUploadException e) {
 	        
 	    }
 		
-//		int id = Integer.parseInt(request.getParameter("id"));
-//		Item item = itemService.findById(id);
-//		
-//		item.setName(request.getParameter("name"));
-//		
-//		double price = Double.parseDouble(request.getParameter("price"));
-//		item.setPrice(price);
-//		
-//		itemService.save(item);
-//		
-//		response.sendRedirect("/item/itemDetails/" + item.getName() + ".html");
+		Item item = itemService.findById(id);
+		
+		item.setName(name);
+		item.setPrice(price);
+		
+		if(imageByte != null)
+			item.getItemImage().setImage(imageByte);
+		
+		itemService.save(item);
+		
+		response.sendRedirect("/item/itemDetails/" + item.getName() + ".html");
 	}
 }

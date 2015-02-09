@@ -5,10 +5,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../layout/tablib.jsp"%>
-
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-
 
 <security:authorize access="hasRole('ROLE_ADMIN')">
 	<!-- Button trigger modal -->
