@@ -9,12 +9,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -27,14 +30,19 @@ public class Item {
 	@Column(name = "release_date")
 	private Date releaseDate;
 	
-	@Transient
-	private MultipartFile file;
+	@Lob
+	@Type(type = "org.hibernate.type.StringClobType")
+	@Column(length = Integer.MAX_VALUE)
+	@Size(min = 1, message = "Beschreibung muss mindestens 1 Zeichen lang sein!")
+	private String description;
 	
 	private double price;
 	
-	private int stock;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
-	@Size(min = 1, message = "Name must be at least 1 character!")
+	@Size(min = 3, message = "Name muss mindestens 3 Zeichen lang sein!")
 	private String name;
 	
 	@ManyToOne
@@ -44,6 +52,12 @@ public class Item {
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "itemImage_id")
 	private ItemImage itemImage;
+	
+	@Transient
+	private MultipartFile file;
+	
+	@Transient
+	private Integer categoryId;
 
 	public Integer getId() {
 		return id;
@@ -67,14 +81,6 @@ public class Item {
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
 	}
 
 	public String getName() {
@@ -101,11 +107,35 @@ public class Item {
 		this.itemImage = itemImage;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}
 
 	public void setFile(MultipartFile file) {
 		this.file = file;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 }

@@ -1,5 +1,3 @@
-<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
-<%@page import="de.ks.kanzashi.servlet.ImageServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -146,7 +144,6 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-	
 	
 	$('#cssmenu > ul > li ul').each(function(index, element){
 		  var count = $(element).find('li').length;
@@ -295,8 +292,8 @@ jQuery(document).ready(function($) {
               </li> -->
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li class="${current == 'register' ? 'active' : ''}"><a
-							href='<spring:url value="/register.html"/>'>Registrieren</a></li>
+						<%-- <li class="${current == 'register' ? 'active' : ''}"><a
+							href='<spring:url value="/register.html"/>'>Registrieren</a></li> --%>
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'login' ? 'active' : ''}"><a
 								href='<spring:url value="/login.html"/>'>Login</a></li>
@@ -314,11 +311,9 @@ jQuery(document).ready(function($) {
 
 		<table>
 			<tr>
-
 				<td style="width: 100%;">				
 						<tiles:insertAttribute name="body" />
 				</td>
-				
 				<td style="vertical-align: top; padding-top: 70px;">
 					<div id="commentWrapper">
 						<div id="comment">

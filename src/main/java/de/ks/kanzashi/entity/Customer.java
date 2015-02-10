@@ -21,12 +21,12 @@ public class Customer {
 	private Date registered;
 	
 	@Id
-	@Size(min = 1, message = "Invalid email address!")
-	@Email(message = "Invalid email address!")
+	@Size(min = 1, message = "Ungültige E-Mail -Adresse!")
+	@Email(message = "Ungültige E-Mail -Adresse!")
 	@UniqueEmail(message = "Diese E-Mail-Adresse existiert bereits")
 	private String email;
 	
-	@Size(min = 5, message = "Name must be at least 5 characters!")
+	@Size(min = 5, message = "Name muss mindestens 5 Zeichen lang sein!")
 	private String password;
 	
 	private boolean enabled;

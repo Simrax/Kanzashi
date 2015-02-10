@@ -5,6 +5,7 @@
 
 <script type="text/javascript">
 jQuery(document).ready(function($) {
+		$("#commentWrapper").hide();
 		$(".triggerRemove").click(function(e) {
 			e.preventDefault();
 			$("#modalRemove .removeBtn").attr("href", $(this).attr("href"));

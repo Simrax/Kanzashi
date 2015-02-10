@@ -29,11 +29,13 @@ public class ImageServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		byte[] image = itemImageService.loadImage(id);
-		response.setContentType("image/jpeg");
-		ServletOutputStream outputStream = response.getOutputStream();
-		outputStream.write(image);
-		outputStream.close();
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			byte[] image = itemImageService.loadImage(id);
+			response.setContentType("image/jpeg");
+			ServletOutputStream outputStream = response.getOutputStream();
+			outputStream.write(image);
+			outputStream.close();
+		} catch (Exception e) {}
 	}
 }

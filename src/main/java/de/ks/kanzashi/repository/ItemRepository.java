@@ -6,8 +6,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import de.ks.kanzashi.entity.Item;
+import de.ks.kanzashi.entity.Category;
 import de.ks.kanzashi.entity.Customer;
+import de.ks.kanzashi.entity.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer>{
 	
@@ -20,4 +21,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	List<Item> findItemListByCustomer(Customer customer, PageRequest pageRequest);
 
 	Item findByNameAndPrice(String name, String price);
+
+	List<Item> findByCategory(Category category);
 }

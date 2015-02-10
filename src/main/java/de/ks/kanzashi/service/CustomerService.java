@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,24 +41,6 @@ public class CustomerService {
 	public Customer findOne(String email) {
 		return userRepository.findByEmail(email);
 	}
-	
-//	@Transactional
-//	public Customer findOneWithItems(String email) {
-//		Customer customer = findOne(email);
-//		List<Item> items = itemRepository.findByCustomer(customer, new PageRequest(0, 10, Direction.DESC, "releaseDate"));
-//		items.parallelStream()
-//			.forEach(item -> {
-//				ItemImage itemImage = itemImageRepository.findByItem(item);
-//				item.setItemImage(itemImage);
-//			});
-//		customer.setItems(items);
-//		return customer;
-//	}
-
-//	public Customer findByName(String name) {
-//		Customer user = userRepository.findByName(name);
-//		return findOneWithItems(user.getId());
-//	}
 
 	public void save(Customer user) {
 		user.setEnabled(true);
@@ -70,9 +54,9 @@ public class CustomerService {
 		
 		userRepository.save(user);
 	}
-
-	public void delete(String email) {
-		Customer customer = userRepository.findByEmail(email);
+	
+	@PreAuthorize("#customer.email == authentication.name or hasRole('ROLE_ADMIN')")
+	public void delete(@P("customer") Customer customer) {
 		userRepository.delete(customer);
 	}
 }

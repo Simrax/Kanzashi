@@ -45,6 +45,12 @@
 }
 </style>
 
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	$("#commentWrapper").hide();
+});
+</script>
+
 <c:if test="${sessionScope[\"SPRING_SECURITY_LAST_EXCEPTION\"].message eq 'Bad credentials'}">
 <div class="alert alert-danger">Email/Password are incorrect.</div>
 </c:if>

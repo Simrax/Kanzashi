@@ -9,7 +9,8 @@
 	<http use-expressions="true">
 		<intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/account**" access="hasRole('ROLE_USER')" />
+ 		<intercept-url pattern="/categoryEdit**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/itemEdit**" access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/login.html" />
 		<logout logout-url="/j_spring_security_logout" />
 	</http>

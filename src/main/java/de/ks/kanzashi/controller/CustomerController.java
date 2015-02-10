@@ -44,7 +44,8 @@ public class CustomerController {
 	
 	@RequestMapping("/users/remove/{email}")
 	public String removeUser(@PathVariable String email){
-		customerService.delete(email);
+		Customer customer = customerService.findOne(email);
+		customerService.delete(customer);
 		return "redirect:/users.html";
 	}
 }
