@@ -248,8 +248,15 @@ jQuery(document).ready(function($) {
 		prefix="tilesx"%>
 
 	<tilesx:useAttribute name="current" />
-
+	
 	<div class="container">
+		<div class="page-header" style="margin: 0px; padding: 0px">
+				<tiles:insertAttribute name="header" />
+		</div>
+	</div>
+	
+	
+	<div class="container">			
 
 		<!-- Static navbar -->
 		<nav class="navbar navbar-default">
@@ -309,10 +316,10 @@ jQuery(document).ready(function($) {
 			<!--/.container-fluid -->
 		</nav>
 
-		<table>
+		<table style="border: 1px solid transparent;">
 			<tr>
 				<td style="width: 100%;">				
-						<tiles:insertAttribute name="body" />
+					<tiles:insertAttribute name="body" />
 				</td>
 				<td style="vertical-align: top; padding-top: 70px;">
 					<div id="commentWrapper">
@@ -323,13 +330,9 @@ jQuery(document).ready(function($) {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><tiles:insertAttribute
-						name="footer" /></td>
+				<td colspan="2" align="center"><tiles:insertAttribute name="footer" /></td>
 			</tr>
 		</table>
-
-
-		<br> <br>
 </div>
 </body>
 </html>

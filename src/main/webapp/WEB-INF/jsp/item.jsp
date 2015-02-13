@@ -22,7 +22,7 @@
 					<div class="modal-body">
 						<a href='<spring:url value="/item/itemDetails/${item.id}.html"/>'>
 								<img src="/image.html?id=${item.itemImage.id}"
-								alt="${item.name}" class="img-circle img-thumbnail" style="width: 200px; height: 150px;"/>
+								alt="${item.name}" class="img-circle img-thumbnail img-responsive" style="width: 200px; height: 150px;"/>
 						</a>
 					</div>
 				</td>

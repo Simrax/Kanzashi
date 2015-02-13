@@ -5,8 +5,9 @@
 
 <tiles-definitions>
 	<definition name="common" template="/WEB-INF/layout/classic.jsp">
-		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+		<put-attribute name="header" value="/WEB-INF/layout/banner.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/jsp/menu-category.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 	
 	<definition name="item" extends="common">
